@@ -9,8 +9,7 @@ from user import User
 
 async def class_command(update: Update, context: ContextTypes, day_=None, next_=False):
     user = User.get_or_none(id=update.effective_user.id)
-    # day = day_ if day_ is not None else datetime.datetime.today().weekday()
-    day = 4
+    day = day_ if day_ is not None else datetime.datetime.today().weekday()
     up = []
     down = []
 
