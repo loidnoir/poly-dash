@@ -1,8 +1,9 @@
-from telegram import (InlineKeyboardButton, KeyboardButton,
-                      ReplyKeyboardMarkup, Update, constants)
+from telegram import (InlineKeyboardButton, ReplyKeyboardMarkup, Update,
+                      constants)
 from telegram.ext import ContextTypes
 
 from commands.class_command import class_command
+from commands.exams_command import exams_command
 from user import User
 
 overall_menu = [
@@ -13,6 +14,9 @@ overall_menu = [
     ],
     [
         InlineKeyboardButton('📚 Ֆեյկ գրադարան')
+    ],
+    [
+        InlineKeyboardButton('🥰 Քննությունների օրացույց 🤓'),
     ]
 ]
 
@@ -100,3 +104,6 @@ async def message_response(update: Update, context: ContextTypes):
             users = users.where(User.group == group)
         for user in users:
             await update._bot.send_message(user.id, text.split(f'announce-{group}')[1])
+
+    elif text.startswith('🥰 Քննությունների օրացույց 🤓'):
+        await exams_command(update, context)
